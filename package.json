@@ -1,0 +1,4 @@
+{
+    "name": "allocate-orders",
+    "main": "allocate.js"
+}

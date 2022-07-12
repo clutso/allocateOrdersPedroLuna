@@ -4,7 +4,7 @@
  * @param  {String} key           Specify the property keyname holding a date
  * @return {Array}                Array of objects sorted by ascending date
  */
-const sortbyDate= (unsortedArray, key) => {
+ const sortbyDate= (unsortedArray, key) => {
   let sortedArray = unsortedArray.map(obj => {
     return {...obj, date: new Date(obj[key])};
   });
@@ -100,10 +100,6 @@ const getDateKey= (someArray) =>{
         stock  = stock - demand;
         //get deliver date
         deliverDate= sortedPurchases[idxPurchases-1].date.toISOString().substring(0, 10);
-        //create an object with the result
-        let saleOrder= {'salesOrderId':sortedSales[idxSales].id, 'availabilityDate': deliverDate};
-        //append to results array
-        results.push(saleOrder);
         //check if the next order could be supplied at a closer date
         if((0>idxSales+1< salesOrders.length) && (sortedSales[idxSales].quantity <= stock)){
           //in case it is posible, stay in the same purchase, hence will use the current date for the next saleOrder (a closer date)
@@ -112,6 +108,10 @@ const getDateKey= (someArray) =>{
         break;
       }
     }
+    //create an object with the result 
+    let saleOrder= {'salesOrderId':sortedSales[idxSales].id, 'availabilityDate': deliverDate};
+    //append to results array
+    results.push(saleOrder);
   }  
   return results;
 }
